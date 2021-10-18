@@ -1,16 +1,38 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Mazer Admin Dashboard</title>
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('template/css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{asset('template/vendors/iconly/bold.css')}}">
+    
+    <!-- Simple Datatables -->
+    <link rel="stylesheet" href="{{asset('template/vendors/simple-datatables/style.css')}}">
+    
+
+    <link rel="stylesheet" href="{{asset('template/vendors/perfect-scrollbar/perfect-scrollbar.css')}}">
+    <link rel="stylesheet" href="{{asset('template/vendors/bootstrap-icons/bootstrap-icons.css')}}">
+    <link rel="stylesheet" href="{{asset('template/css/app.css')}}">
+    <link rel="shortcut icon" href="{{asset('template/images/favicon.svg')}}" type="image/x-icon">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+
+</head>
+
+{{--  --}}
+    {{-- <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Meta, title, CSS, favicons, etc. -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>@yield('title')</title>
-        <!-- Bootstrap -->
-        <link href="{{asset('gentella/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
-        <!-- Font Awesome -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+        
         <!-- NProgress -->
         <link href="{{asset('gentella/nprogress/nprogress.css')}}" rel="stylesheet">
         <!-- iCheck -->
@@ -38,12 +60,151 @@
         <script src="{{asset('bootstrap_datepicker/js/bootstrap-datepicker.js')}}"></script>
         <script src="{{asset('bootstrap_datepicker/js/bootstrap-datepicker.min.js')}}"></script>
         <script src="{{asset('bootstrap_datepicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
-    </head>
-    @if(!empty(auth()->user()->id_personal))
+    </head> --}}
+
+
+
+
+
+<body>
+    <div id="app">
+        @include("layouts.sidebar")
+    
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="row">
+
+                    {{-- <div class="col-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="align-items-center">
+                                    <h3>@yield('title')</h3>
+                                    <nav aria-label="breadcrumb" class="breadcrumb-header float-lg-start">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Alert</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar avatar-xl">
+                                        <img src="{{asset('template/images/faces/1.jpg')}}" alt="Face 1">
+                                    </div>
+                                    <div class="ms-3 name">
+                                        <h5 class="font-bold">John Duck</h5>
+                                        <h6 class="text-muted mb-0">@johnducky</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="align-items-center">
+                                    <h3>@yield('title')</h3>
+                                    <nav aria-label="breadcrumb" class="breadcrumb-header float-lg-start">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Alert</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                            
+                            <div class="col-3">
+                                <div class="d-flex align-items-center float-end"  id="dropdownMenuButtonIcon" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
+                                    <div class="avatar avatar-xl">
+                                        <img src="{{asset('template/images/faces/1.jpg')}}" alt="Face 1">
+                                    </div>
+                                    <div class="ms-3 name">
+                                        <h5 class="font-bold">John Duck</h5>
+                                        <h6 class="text-muted mb-0">@johnducky</h6>
+                                    </div>
+                                    <div class="ms-3">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                </div>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonIcon" style="margin: 0px;">
+                                    <a class="dropdown-item" href="{{ action('usuarioController@getInfo') }}"><i class="fas fa-user-circle"></i>
+                                        Ver información de la cuenta</a>
+                                    <a class="dropdown-item" href="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-power-off"></i> Cerrar sesión</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            {{-- Contenido de la página --}}
+            <div class="page-content">
+                <section class="row">
+                    <div class="col-12">
+                        <div class="x_panel">
+                            <div class="x_title"><b>@yield('ventana_t')</b></div>
+                            @yield('content')                        
+                            </div>
+                        </div>    
+                    </div>
+                </section>
+                <footer>
+                    <div class="footer clearfix mb-0 text-muted">
+                        <div class="float-start">
+                            <p>2021 &copy; Mazer</p>
+                        </div>
+                        <div class="float-end">
+                            <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
+                                    href="http://ahmadsaugi.com">A. Saugi</a></p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="{{asset('template/vendors/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+<script src="{{asset('template/js/bootstrap.bundle.min.js')}}"></script>
+
+<script src="{{asset('template/vendors/apexcharts/apexcharts.js')}}"></script>
+<script src="{{asset('template/js/pages/dashboard.js')}}"></script>
+
+<script src="{{asset('template/js/mazer.js')}}"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+    {{-- @if(!empty(auth()->user()->id_personal))
     <body class="nav-md footer_fixed">
     @else
     <body class="nav-sm footer_fixed">
     @endif
+
+
+    <div id="app">
         <div class="container body">
             
             <div class="main_container">
@@ -137,6 +298,7 @@
                 @csrf
             </form>
         </div>      
+        </div> 
     </body>
 </html>
 
@@ -253,4 +415,4 @@ function soloNumeros(e){
         return false;
     }
     }
-</script>
+</script> --}}
