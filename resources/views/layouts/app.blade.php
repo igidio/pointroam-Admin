@@ -165,7 +165,9 @@
                         </div>    
                     </div>
                 </section>
-                <footer>
+                <footer>                
+                    <example-component/>
+                    <script src="{{mix('js/app.js')}}"></script>
                     <div class="footer clearfix mb-0 text-muted">
                         <div class="float-start">
                             <p>2021 &copy; Mazer</p>
