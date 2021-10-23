@@ -1,10 +1,9 @@
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-m">
     <div class="modal-content">
-
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel2">Agregar camión</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span>
         </button>
       </div>
       <div class="modal-body">
@@ -86,7 +85,7 @@
           </div>
         </div>
 
-        <div class="col-6">
+        {{-- <div class="col-6">
           <div class="form-group">
             <label for="genero" class="control-label mb-1">Fecha de Nacimiento</label> <b style="color: red;">*</b>
             <div class="col-12">
@@ -94,7 +93,16 @@
               <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
             </div>
           </div>
+        </div> --}}
+        <div class="col-6">
+          <div class="form-group">
+            <label for="genero" class="control-label mb-1">Fecha de Nacimiento</label> <b style="color: red;">*</b>
+            <div class="col-12">
+              <input onchange="validar()" id="fnac" name="fnac" class="date-picker form-control" required="required" type="text" style="background-color: #fff;">              
+            </div>
+          </div>
         </div>
+
       </div>
 
       <div class="row">

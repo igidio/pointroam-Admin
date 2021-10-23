@@ -4,7 +4,7 @@
 @section('title', 'Personal')
 @section('titulo', 'Personal')
 
-<button type="button" class="btn btn-primary btn-w btn-block mb-3" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fas fa-plus-circle"></i> Crear miembro del personal</button>
+<button type="button" class="btn btn-primary btn-w btn-block mb-3" data-bs-toggle="modal" data-bs-target=".bs-example-modal-sm"><i class="fas fa-plus-circle"></i> Crear miembro del personal</button>
 @include("forms.personal.m_crear")
 
 <div class="card">
@@ -43,8 +43,8 @@
             <button type="button" class="btn btn-round btn-success">Conceder</button>
           </td>
           <td>
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".bs-example-modal-sm_e_{{$per->id}}"><i class="fas fa-edit"></i></button>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm_d_{{$per->id}}"><i class="fas fa-times"></i></button>
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target=".bs-example-modal-sm_e_{{$per->id}}"><i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target=".bs-example-modal-sm_d_{{$per->id}}"><i class="fas fa-times"></i></button>
           </td>
           @include("forms.personal.m_modificar")
           @include("forms.personal.m_eliminar")

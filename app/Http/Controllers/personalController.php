@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+//Acá definimos la base de datos
+use App\Personal;
 
 class personalController extends Controller
 {
@@ -12,26 +14,26 @@ class personalController extends Controller
   }
 
   public function listar() {
-    $personal = DB::table('personal')->get();
-
-    return view('forms/personal/listar', [
-      'personal' => $personal
-    ]);
+    $personal = Personal::all();
+    return view('forms/personal/listar', [ 'personal' => $personal ]);
+    //$personal = DB::table('personal')->get();
   }
 
   public function nuevo(Request $request) {
-    $nombres = $request->input('nombres');
-    $apellidop = $request->input('apellido_p');
-    $apellidom = $request->input('apellido_m');
-    $ci = $request->input('ci');
-    $cid = $request->input('cid');
-    $genero = $request->input('genero');
-    $fnac = $request->input('fnac');
-    $telefono = $request->input('telefono');
-    $direccion = $request->input('direccion');
-    $id_cargo = $request->input('id_cargo');   
+    $personal = new Personal();
+    $personal->nombres    = $request->input('nombres');
+    $personal->apellido_p = $request->input('apellido_p');
+    $personal->apellido_m = $request->input('apellido_m');
+    $personal->ci         = $request->input('ci');
+    $personal->cid        = $request->input('cid');
+    $personal->genero     = $request->input('genero');
+    $personal->fnac       = $request->input('fnac');
+    $personal->telefono   = $request->input('telefono');
+    $personal->direccion  = $request->input('direccion');
+    $personal->id_cargo   = $request->input('id_cargo');
+    $personal->save();
 
-    $destinos = DB::table('personal')->insert(array(
+    /*$destinos = DB::table('personal')->insert(array(
       'nombres' => $nombres,
       'apellido_p' => $apellidop,
       'apellido_m' => $apellidom,
@@ -42,7 +44,7 @@ class personalController extends Controller
       'telefono' => $telefono,
       'direccion' => $direccion,
       'id_cargo' => $id_cargo,
-    ));
+    ));*/
 
     return redirect()->action('personalController@listar')->with('message', 'Miembro del personal creado correctamente');
   }
