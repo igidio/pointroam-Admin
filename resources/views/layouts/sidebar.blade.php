@@ -92,7 +92,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{ action('camionesController@listar') }}" class='sidebar-link'>
+                    <a href="{{ action('VehiclesController@listar') }}" class='sidebar-link'>
                         <i class="fas fa-truck"></i>
                         <span>Vehículos registrados</span>
                     </a>

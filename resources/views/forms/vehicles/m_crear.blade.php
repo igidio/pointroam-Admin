@@ -8,7 +8,7 @@
         </button>
       </div>
       
-      <form action="{{ action('camionesController@nuevo')}}" method="post" autocomplete='off'>
+      <form action="{{ action('VehiclesController@nuevo')}}" method="post" autocomplete='off'>
         
         <form-vehicles/>
         

@@ -16,7 +16,7 @@ class personalController extends Controller
   public function listar() {
     $personal = Personal::all();
     return view('forms/personal/listar', [ 'personal' => $personal ]);
-    //$personal = DB::table('personal')->get();
+    //$personal = DB::table('personal')->get(); //Vieja Forma
   }
 
   public function nuevo(Request $request) {

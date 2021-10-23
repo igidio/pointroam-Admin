@@ -6,7 +6,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action="{{ action('camionesController@eliminar')}}" method="post">
+      <form action="{{ action('VehiclesController@eliminar')}}" method="post">
             {{ csrf_field() }}                  
           <input type="hidden" name="id" value="{{$camion->id}}"> 
           <h3>¿Seguro desea eliminar este elemento?</h3>

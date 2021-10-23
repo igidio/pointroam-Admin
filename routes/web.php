@@ -22,11 +22,11 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 //Camiones
-Route::group(['prefix'=>'transporte/camiones'], function(){
-    Route::get('/', 'camionesController@listar')->name('listarCamiones');
-    Route::post('/crear', 'camionesController@nuevo')->name('listarCamionesN');
-    Route::post('/editar', 'camionesController@editar')->name('listarCamionesM');
-    Route::post('/eliminar', 'camionesController@eliminar')->name('listarCamionesE');
+Route::group(['prefix'=>'transporte/vehicles'], function(){
+    Route::get('/', 'VehiclesController@listar')->name('listarCamiones');
+    Route::post('/crear', 'VehiclesController@nuevo')->name('listarCamionesN');
+    Route::post('/editar', 'VehiclesController@editar')->name('listarCamionesM');
+    Route::post('/eliminar', 'VehiclesController@eliminar')->name('listarCamionesE');
 });
 
 //Chóferes

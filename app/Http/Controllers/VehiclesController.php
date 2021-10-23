@@ -4,19 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Vehicle;
 
-class camionesController extends Controller
+class VehiclesController extends Controller
 {
   public function __construct() {
     $this->middleware('auth');
   }
 
   public function listar() {
-    $camiones = DB::table('camiones')->get();
-
-    return view('forms/camiones/listar', [
-      'camiones' => $camiones
-    ]);
+    $vehicles = Vehicle::all();
+    return view('forms/vehicles/listar', [ 'camiones' => $vehicles ]);
   }
 
   public function nuevo(Request $request) {
@@ -36,7 +34,7 @@ class camionesController extends Controller
       'n_ruedas' => $n_ruedas,
     ));
 
-    return redirect()->action('camionesController@listar')->with('message', 'Vehículo creado correctamente');
+    return redirect()->action('VehiclesController@listar')->with('message', 'Vehículo creado correctamente');
   }
 
   public function editar(Request $request) {
@@ -57,7 +55,7 @@ class camionesController extends Controller
       'n_ruedas' => $n_ruedas,
     ));
 
-    return redirect()->action('camionesController@listar')->with('message', 'Vehículo modificado correctamente');
+    return redirect()->action('VehiclesController@listar')->with('message', 'Vehículo modificado correctamente');
   }
 
   public function eliminar(Request $request) {
@@ -65,6 +63,6 @@ class camionesController extends Controller
 
     $destinos = DB::table('camiones')->where('id', $id)->delete();
 
-    return redirect()->action('camionesController@listar')->with('message', 'Vehículo eliminado correctamente');
+    return redirect()->action('VehiclesController@listar')->with('message', 'Vehículo eliminado correctamente');
   }
 }

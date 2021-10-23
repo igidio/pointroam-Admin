@@ -6,7 +6,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <form action="{{ action('camionesController@editar')}}" method="post" autocomplete='off'>
+      <form action="{{ action('VehiclesController@editar')}}" method="post" autocomplete='off'>
             {{ csrf_field() }}     
             <input type="hidden" name="id" value="{{$camion->id}}">
 
