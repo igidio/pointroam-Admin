@@ -68,9 +68,11 @@
 
 <body>
     <div id="app">
-        @include("layouts.sidebar")
-    
-        <div id="main">
+        {{-- @include("layouts.sidebar") --}}
+        <app></app>
+        
+        
+        {{-- <div id="main">
             <header class="mb-3">
                 <a href="#" class="burger-btn d-block d-xl-none">
                     <i class="bi bi-justify fs-3"></i>
@@ -113,7 +115,7 @@
                     </div>
                 </div> --}}
 
-                <div class="card">
+            {{--    <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-9">
@@ -152,10 +154,10 @@
                     </div>
                 </div>
 
-            </div>
+            </div> --}}
 
             {{-- Contenido de la página --}}
-            <div class="page-content">
+            {{--<div class="page-content">
                 <section class="row">
                     <div class="col-12">
                         <div class="x_panel">
@@ -181,8 +183,9 @@
             </div>
 
         </div>
+    </div> --}}
     </div>
-</div>
+<script src="{{mix('js/app.js')}}"></script>
 <script src="{{asset('template/vendors/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
 <script src="{{asset('template/js/bootstrap.bundle.min.js')}}"></script>
 

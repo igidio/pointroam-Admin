@@ -4,6 +4,13 @@
         <div class="card-body">
         <!-- Tabla de informacion -->
 
+        <div v-if="!isLoaded">
+            <div class="spinner-grow text-primary justify-content-center" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div v-else>        
+
         <table class="table table-striped table-bordered" style="width:100%" id="table1">
             <thead>
             <tr>
@@ -40,22 +47,62 @@
             <!-- @endforeach -->
         </tbody>
         </table>
+
+        </div>
     </div>
     
     </div>
 </template>
 
 <script>
+import '/template/vendors/simple-datatables/simple-datatables.js';
+import Vue from 'vue';
+// Vue.use(simpleDatatables );
+
+// let table1 = document.querySelector('#table1');
+// let dataTable = new sd.simpleDatatables.DataTable(table1);
+
+const scriptLoader = {
+    loaded: [],
+    load (src) {
+        if (this.loaded.indexOf(src) !== -1) {
+            return
+        }
+
+        this.loaded.push(src)
+
+        if (document) {
+            const script = document.createElement('script')
+            script.setAttribute('src', src)
+            document.head.appendChild(script)
+        }
+    }
+}
+
+Vue.use({
+    install () {
+        Vue.prototype.$scriptLoader = scriptLoader
+    }
+})
+
+
+
 export default {
     data(){
         return {
-            vehicles: []
+            vehicles: [],
+            isLoaded: false
         }
+    },
+    created(){
+        this.$scriptLoader.load('/template/vendors/simple-datatables/simple-datatables.js')
     },
     mounted(){
         axios.get('/api/vehicles').then(response => {
             this.vehicles = response.data;
+            this.isLoaded = true
         });
+        
     }
 }
 </script>
