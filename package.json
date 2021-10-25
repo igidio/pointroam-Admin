@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@andresouzaabreu/vue-data-table": "^3.2.1",
         "@popperjs/core": "^2.10.2",
         "mdb-ui-kit": "^3.9.0",
         "vue-router": "^3.5.2"

@@ -62,10 +62,6 @@
         <script src="{{asset('bootstrap_datepicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
     </head> --}}
 
-
-
-
-
 <body>
     <div id="app">
         {{-- @include("layouts.sidebar") --}}
@@ -193,6 +189,8 @@
 <script src="{{asset('template/js/pages/dashboard.js')}}"></script>
 
 <script src="{{asset('template/js/mazer.js')}}"></script>
+
+
 
 </body>
 </html>
