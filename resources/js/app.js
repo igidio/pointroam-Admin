@@ -3,7 +3,8 @@ require('./bootstrap');
 window.Vue = require('vue').default;
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
-
+// import Vuex from 'vuex';
+// Vue.use(Vuex)
 
 import App          from './components/App.vue'
 import Dashboard    from './components/dashboards/Dashboard.vue'
@@ -27,3 +28,16 @@ const app = new Vue({
     },
     router
 });
+
+// export default new Vuex.Store({
+//     state: {
+//       vehicles: [],
+//       vehicle: {nombre: '', id: ''}
+//     },
+//     mutations: {
+//     },
+//     actions: {
+//     },
+//     modules: {
+//     }
+// })

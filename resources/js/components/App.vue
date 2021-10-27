@@ -10,7 +10,6 @@
 
         <div class="page-heading">
             <div class="row">
-
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -48,7 +47,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="page-content">

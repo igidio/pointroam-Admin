@@ -1,17 +1,17 @@
 <template>
     <div>
-        <VehiclesModalAdd/>
+        <Alert/>        
         <VehiclesIndex/>
     </div>
 </template>
 
 <script>
 import VehiclesIndex from './index/VehiclesIndex.vue'
-import VehiclesModalAdd from './modal/VehiclesModalAdd.vue'
+import Alert from '../_template/sub/Alert.vue'
 
 export default {
     components: {
-        VehiclesIndex, VehiclesModalAdd
+        VehiclesIndex, Alert
     }
 }
 </script>

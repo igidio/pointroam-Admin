@@ -21,8 +21,8 @@ class CamionesMigration extends Migration
             $table->integer('capacidad_carga');
             $table->integer('capacidad_gasolina');
             $table->integer('n_ruedas');
-            $table->foreignId('id_chofer')->unsigned()->default('0');
-            $table->foreign('id_chofer')->references('id')->on('choferes');
+            //$table->foreignId('id_chofer')->unsigned()->default('0');
+            //$table->foreign('id_chofer')->references('id')->on('choferes');
             $table->timestamps();
         });
 

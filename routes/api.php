@@ -22,4 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route::post('vehicles', 'VehiclesController@store');
 //Route::apiResource('vehicles', 'VehiclesController')->withoutMiddleware(['auth']);
 
-Route::apiResource('vehicles', VehiclesController::class)->withoutMiddleware(['cors']);
+Route::group(['middleware' => ['cors']], function () {
+     Route::apiResource('vehicles', VehiclesController::class);
+});

@@ -19,10 +19,27 @@ class VehiclesController extends Controller
         $vehicle = Vehicle::create($request->all());
         return new Vehicle( $vehicle );
     }*/
-    public function store(VehiclesRequest $request){
+
+    /** 
+     * Sotre a newly created resource in storage.
+     * 
+        * @param \Illuminate\Http\Request $request
+        * @return \Illuminate\Http\Response 
+    */
+    public function store(Request $request){
         //alert("Funciona");
-        alert("hola");
-        $vehicle = $request->all();
-        return new Vehicle( $vehicle );
+        Vehicle::create($request->all());
+        //$vehicle = $request->all();
+        //return new Vehicle( $vehicle );
+        return (['message' => "Actualizado"]);
+    }
+
+    public function update(Request $request, Vehicle $vehicle){
+        $vehicle->fill($request->post())->save();
+        //$vehicle->update($request->validated())
+    }
+
+    public function destroy(Vehicle $vehicle){
+        $vehicle->delete();
     }
 }

@@ -9,20 +9,14 @@
         <div class="modal-content">
           <div class="modal-header bg-danger">
             <h4 class="modal-title white">Eliminar camión</h4>
-          </div>
-          <form action="" method="post">
+          </div>>
             <div class="modal-body">
-              <input type="show" name="id" :value="data.id"> 
               <h3>¿Seguro desea eliminar este elemento?</h3>
-              <!-- <form action="{{ action('VehiclesController@eliminar')}}" method="post"> -->
-              <!-- {{ csrf_field() }}                   -->
-              <!-- <input type="hidden" name="id" value="{{$camion->id}}">  -->
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-danger">Elminar elemento</button>
+              <button type="submit" @click="deleteVehicle" data-bs-dismiss="modal" class="btn btn-danger">Elminar elemento</button>
             </div>
-          </form> 
         </div>
       </div>
     </div>
@@ -36,6 +30,15 @@ export default {
     // prop below is REQUIRED:
     data: {
       type: Object
+    },
+  },
+  methods: {
+    deleteVehicle(){
+      axios.delete('/api/vehicles/' + this.data.id )
+        .then(response => {
+          //alert("Eliminado correctamente")
+        })
+
     }
   }
 }
