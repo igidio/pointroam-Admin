@@ -4,23 +4,23 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DestinosMigration extends Migration
+//Tabla 'Destions'
+class Destinations extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('destinos', function (Blueprint $table) {
+        Schema::create('destinations', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 30)->nullable()->default('');;
-            $table->double('c_latitud')->nullable();
-            $table->double('c_longitud')->nullable();
-            $table->text('direccion')->nullable();
-            $table->string('provincia', 50)->nullable()->default('');;
-            $table->string('departamento', 20)->nullable()->default('');;
+            //nombre
+            $table->string('name', 30)->nullable()->default('');;
+            //c_latitud
+            $table->double('latitude')->nullable();
+            //c_longitud
+            $table->double('longitude')->nullable();
+            //direccion
+            $table->text('address')->nullable();
+            //departamento
+            $table->string('departament', 20)->nullable()->default('');
             $table->timestamps();
         });
 

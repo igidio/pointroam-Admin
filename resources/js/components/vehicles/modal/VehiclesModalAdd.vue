@@ -9,7 +9,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
                     </div>
                     <form @submit.prevent="submit_form" autocomplete='off'>
-                        <VehiclesForm :datos="datos" @functionProp="submit_form"/>
+                        <VehiclesForm :formData="formData" @functionProp="submit_form"/>
                     </form>
 
                 </div>
@@ -26,13 +26,13 @@ export default {
     mixins: [DateMixins],
     data(){
         return {
-            datos: {
-                placa: "",
-                marca: "",
-                modelo: "",
-                capacidad_carga: null,
-                capacidad_gasolina: null,
-                n_ruedas: null
+            formData: {
+                carID: "",
+                brand: "",
+                model: "",
+                loadingCapacity: null,
+                fuelCapacity: null,
+                wheelNumber: null
             }
         }
     },
@@ -45,23 +45,23 @@ export default {
     methods: {
         async submit_form(){
             await axios.post('api/vehicles',{
-                placa:                  this.datos.placa,
-                marca:                  this.datos.marca,
-                modelo:                 this.datos.modelo,
-                capacidad_carga:        this.datos.capacidad_carga,
-                capacidad_gasolina:     this.datos.capacidad_gasolina,
-                n_ruedas:               this.datos.n_ruedas,
-                id_chofer:               '1'
+                carID:                      this.formData.carID,
+                brand:                      this.formData.brand,
+                model:                      this.formData.model,
+                loadingCapacity:            this.formData.loadingCapacity,
+                fuelCapacity:               this.formData.fuelCapacity,
+                wheelNumber:                this.formData.wheelNumber,
+                color:               'Negro'
             })
             .then(response => {
                 this.vehicles.push({
-                    placa: this.datos.placa,
-                    marca: this.datos.marca,
-                    modelo: this.datos.modelo,
-                    capacidad_carga: this.datos.capacidad_carga,
-                    capacidad_gasolina: this.datos.capacidad_gasolina,
-                    n_ruedas: this.datos.n_ruedas,
-                    id_chofer: null,
+                    carID: this.formData.carID,
+                    brand: this.formData.brand,
+                    model: this.formData.model,
+                    loadingCapacity: this.formData.loadingCapacity,
+                    fuelCapacity: this.formData.fuelCapacity,
+                    wheelNumber: this.formData.wheelNumber,
+                    //id_chofer: null,
                     id: this.vehicles.length + 1,
                     created_at: this.todayDate(),
                     updated_at: this.todayDate(),

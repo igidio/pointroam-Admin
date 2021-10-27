@@ -1,22 +1,18 @@
 <?php
 
+namespace Database\Seeders;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
-class usersSeeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
+class UsersSeeder extends Seeder {
+    public function run() {
         DB::table('users')->insert([
             [
-              'id_personal' => '1',
-              'id_cliente' => null,
-              'id_chofer' => null,
-              'acceso' => true,
+              'idSubjects' => 1,
+              'idCustomers' => null,
+              'idDrivers' => null,
+              'access' => true,
               'username' => 'enriquex',
               'email' => 'elquiquealvarez@gmail.com',
               'password' => Hash::make('QWERTYUI'),
@@ -24,10 +20,10 @@ class usersSeeder extends Seeder
               'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-              'id_personal' => null,
-              'id_cliente' => '1',
-              'id_chofer' => null,
-              'acceso' => true,
+              'idSubjects' => null,
+              'idCustomers' => 1,
+              'idDrivers' => null,
+              'access' => true,
               'username' => 'salva2000',
               'email' => 'salvadorcaceres@gmail.com',
               'password' => Hash::make('QWERTYUI'),
@@ -35,16 +31,16 @@ class usersSeeder extends Seeder
               'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-              'id_personal' => null,
-              'id_cliente' => null,
-              'id_chofer' => '1',
-              'acceso' => true,
+              'idSubjects' => null,
+              'idCustomers' => null,
+              'idDrivers' => 1,
+              'access' => true,
               'username' => 'juanar9',
               'email' => 'juanariel9@gmail.com',
               'password' => Hash::make('QWERTYUI'),
               'created_at' => date('Y-m-d H:i:s'),
               'updated_at' => date('Y-m-d H:i:s')
             ]
-          ]);
+        ]);
     }
 }

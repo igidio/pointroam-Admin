@@ -35,6 +35,7 @@ export default {
     },
     data(){
         return {
+            vehicles: [],
             isLoaded: false
         }
     },
@@ -47,7 +48,10 @@ export default {
                 //this.vehicles = response.data;
                 this.vehicles = response.data.data;
                 this.isLoaded = true
-            });
+            }).then(
+                console.log(this.vehicles)
+            );
+            
         },
     },
     computed: {
@@ -55,12 +59,12 @@ export default {
             //alert("Esto");
             return {
                 columns: [
-                    {key: "placa", title: "Placa"},
-                    {key: "marca", title: "Marca"},
-                    {key: "modelo", title: "Modelo"},
-                    {key: "capacidad_carga", title: "Capacidad de Carga (En Kg.)"},
-                    {key: "capacidad_gasolina", title: "Capacidad de Gasolina (En Lt.)"},
-                    {key: "n_ruedas", title: "Número de ruedas"},
+                    {key: "carID", title: "Placa"},
+                    {key: "brand", title: "Marca"},
+                    {key: "model", title: "Modelo"},
+                    {key: "loadingCapacity", title: "Capacidad de Carga (En Kg.)"},
+                    {key: "fuelCapacity", title: "Capacidad de Gasolina (En Lt.)"},
+                    {key: "wheelNumber", title: "Número de ruedas"},
                     {key: "updated_at", title: "Fecha de creación"},
                     {title: "Modificar", component: BtnModificar },
                     {title: "Eliminar", component: BtnEliminar},

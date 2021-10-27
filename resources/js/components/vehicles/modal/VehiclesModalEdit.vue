@@ -10,10 +10,9 @@
                         <div class="modal-header">
                             <h4 class="modal-title" id="myModalLabel2">Modificar información</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
-                        </div>                    
-                    <!-- <form action="{{ action('VehiclesController@nuevo')}}" method="post" autocomplete='off'> -->
+                        </div>
                     <form action="" method="post" autocomplete='off'>
-                        <VehiclesForm :datos="datos" @functionProp="submit_form"/>
+                        <VehiclesForm :formData="formData" @functionProp="submit_form"/>
                     </form>
 
                 </div>
@@ -35,56 +34,28 @@ export default {
     },
     data(){
         return {
-            datos: {
-                placa: this.data.placa,
-                marca: this.data.marca,
-                modelo: this.data.modelo,
-                capacidad_carga: this.data.capacidad_carga,
-                capacidad_gasolina: this.data.capacidad_gasolina,
-                n_ruedas: this.data.n_ruedas,
+            formData: {
+                carID: this.data.carID,
+                brand: this.data.brand,
+                model: this.data.model,
+                loadingCapacity: this.data.loadingCapacity,
+                fuelCapacity: this.data.fuelCapacity,
+                wheelNumber: this.data.wheelNumber,
             }
         }
     },
     methods: {
         async submit_form(){
             await axios.put('api/vehicles/' + this.data.id,{
-                placa:                  this.datos.placa,
-                marca:                  this.datos.marca,
-                modelo:                 this.datos.modelo,
-                capacidad_carga:        this.datos.capacidad_carga,
-                capacidad_gasolina:     this.datos.capacidad_gasolina,
-                n_ruedas:               this.datos.n_ruedas,
-                id_chofer:               '1'
+                carID:                  this.formData.carID,
+                brand:                  this.formData.brand,
+                model:                 this.formData.model,
+                loadingCapacity:        this.formData.loadingCapacity,
+                fuelCapacity:     this.formData.fuelCapacity,
+                wheelNumber:               this.formData.wheelNumber,
+                //id_chofer:               '1'
+                'fuelType': 'Gas',
             })
-                .then(response => {                    
-                    console.log(this.vehicles);
-                    // let newData = this.data.map(obj =>
-                    //     //obj.id === this.data.id ? { ...obj, completed: true } : obj
-                    //     obj.id === this.data.id ? { 
-                    //         placa: this.datos.placa,
-                    //         marca: this.datos.marca,
-                    //         modelo: this.datos.modelo,
-                    //         capacidad_carga: this.datos.capacidad_carga,
-                    //         capacidad_gasolina: this.datos.capacidad_gasolina,
-                    //         n_ruedas: this.datos.n_ruedas,
-                    //         id_chofer: null,
-                    //         created_at: this.datos.created_at,
-                    //         updated_at: this.todayDate(),
-                    //     } : obj
-                    
-                    //var newData = this.data.find(({ _id }) => _id === editingUser); 
-                    })
-                //$("#add").hide();
-                // $('#add').modal('toggle');
-                
-                // $('#add').removeClass('in');
-                // $('#add').attr("aria-hidden","true");
-                // $('#add').css("display", "none");
-                // $('.modal-backdrop').remove();
-                // $('body').removeClass('modal-open');
-
-                //this.$router.push('/vehicles')
-
             .catch(function (error) {
                  alert(error)
             });

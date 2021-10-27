@@ -4,19 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CargoMigration extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('cargos', function (Blueprint $table) {
+//Tabla: cargos
+class Roles extends Migration {
+    public function up() {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 50)->unique();
-            $table->string('descripcion');
+            $table->string('rolename', 50)->unique();
+            $table->string('description');
             $table->timestamps();
         });
     }

@@ -16,12 +16,12 @@ class VehicleResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'placa' => $this->placa,
-            'marca' => $this->marca,
-            'modelo' => $this->modelo,
-            'capacidad_carga' => $this->capacidad_carga,
-            'capacidad_gasolina' => $this->capacidad_gasolina,
-            'n_ruedas' => $this->n_ruedas,
+            'carID' => $this->carID,
+            'brand' => $this->brand,
+            'model' => $this->model,
+            'loadingCapacity' => $this->loadingCapacity,
+            'fuelCapacity' => $this->fuelCapacity,
+            'wheelNumber' => $this->wheelNumber,
             'id_chofer' => $this->id_chofer,
             'created_at' => $this->created_at->toDateString(),
             'updated_at' => $this->updated_at->toDateString()

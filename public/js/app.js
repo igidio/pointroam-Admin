@@ -12559,7 +12559,7 @@ __webpack_require__.r(__webpack_exports__);
     InputText: _template_sub_InputText_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
-    datos: Object,
+    formData: Object,
     functionProp: {
       type: Function
     }
@@ -12570,8 +12570,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
-    habilitado: function habilitado() {
-      if (this.datos.placa.trim() != "" && this.datos.marca.trim() != "" && this.datos.modelo.trim() != "" && this.datos.capacidad_carga != null && this.datos.capacidad_gasolina != null && this.datos.n_ruedas != null) {
+    isValid: function isValid() {
+      if (this.formData.carID.trim() != "" && this.formData.brand.trim() != "" && this.formData.model.trim() != "" && this.formData.loadingCapacity != null && this.formData.fuelCapacity != null && this.formData.wheelNumber != null) {
         return false;
       } else {
         return true;
@@ -12633,6 +12633,7 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].component("data-table", (_andresouza
   },
   data: function data() {
     return {
+      vehicles: [],
       isLoaded: false
     };
   },
@@ -12647,7 +12648,7 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].component("data-table", (_andresouza
         //this.vehicles = response.data;
         _this.vehicles = response.data.data;
         _this.isLoaded = true;
-      });
+      }).then(console.log(this.vehicles));
     }
   },
   computed: {
@@ -12655,22 +12656,22 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].component("data-table", (_andresouza
       //alert("Esto");
       return {
         columns: [{
-          key: "placa",
+          key: "carID",
           title: "Placa"
         }, {
-          key: "marca",
+          key: "brand",
           title: "Marca"
         }, {
-          key: "modelo",
+          key: "model",
           title: "Modelo"
         }, {
-          key: "capacidad_carga",
+          key: "loadingCapacity",
           title: "Capacidad de Carga (En Kg.)"
         }, {
-          key: "capacidad_gasolina",
+          key: "fuelCapacity",
           title: "Capacidad de Gasolina (En Lt.)"
         }, {
-          key: "n_ruedas",
+          key: "wheelNumber",
           title: "Número de ruedas"
         }, {
           key: "updated_at",
@@ -12738,13 +12739,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mixins: [_mixins_dateMixins_js__WEBPACK_IMPORTED_MODULE_2__["default"]],
   data: function data() {
     return {
-      datos: {
-        placa: "",
-        marca: "",
-        modelo: "",
-        capacidad_carga: null,
-        capacidad_gasolina: null,
-        n_ruedas: null
+      formData: {
+        carID: "",
+        brand: "",
+        model: "",
+        loadingCapacity: null,
+        fuelCapacity: null,
+        wheelNumber: null
       }
     };
   },
@@ -12765,22 +12766,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.next = 2;
                 return axios.post('api/vehicles', {
-                  placa: _this.datos.placa,
-                  marca: _this.datos.marca,
-                  modelo: _this.datos.modelo,
-                  capacidad_carga: _this.datos.capacidad_carga,
-                  capacidad_gasolina: _this.datos.capacidad_gasolina,
-                  n_ruedas: _this.datos.n_ruedas,
-                  id_chofer: '1'
+                  carID: _this.formData.carID,
+                  brand: _this.formData.brand,
+                  model: _this.formData.model,
+                  loadingCapacity: _this.formData.loadingCapacity,
+                  fuelCapacity: _this.formData.fuelCapacity,
+                  wheelNumber: _this.formData.wheelNumber,
+                  color: 'Negro'
                 }).then(function (response) {
                   _this.vehicles.push({
-                    placa: _this.datos.placa,
-                    marca: _this.datos.marca,
-                    modelo: _this.datos.modelo,
-                    capacidad_carga: _this.datos.capacidad_carga,
-                    capacidad_gasolina: _this.datos.capacidad_gasolina,
-                    n_ruedas: _this.datos.n_ruedas,
-                    id_chofer: null,
+                    carID: _this.formData.carID,
+                    brand: _this.formData.brand,
+                    model: _this.formData.model,
+                    loadingCapacity: _this.formData.loadingCapacity,
+                    fuelCapacity: _this.formData.fuelCapacity,
+                    wheelNumber: _this.formData.wheelNumber,
+                    //id_chofer: null,
                     id: _this.vehicles.length + 1,
                     created_at: _this.todayDate(),
                     updated_at: _this.todayDate()
@@ -12900,7 +12901,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -12912,13 +12912,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      datos: {
-        placa: this.data.placa,
-        marca: this.data.marca,
-        modelo: this.data.modelo,
-        capacidad_carga: this.data.capacidad_carga,
-        capacidad_gasolina: this.data.capacidad_gasolina,
-        n_ruedas: this.data.n_ruedas
+      formData: {
+        carID: this.data.carID,
+        brand: this.data.brand,
+        model: this.data.model,
+        loadingCapacity: this.data.loadingCapacity,
+        fuelCapacity: this.data.fuelCapacity,
+        wheelNumber: this.data.wheelNumber
       }
     };
   },
@@ -12933,37 +12933,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.next = 2;
                 return axios.put('api/vehicles/' + _this.data.id, {
-                  placa: _this.datos.placa,
-                  marca: _this.datos.marca,
-                  modelo: _this.datos.modelo,
-                  capacidad_carga: _this.datos.capacidad_carga,
-                  capacidad_gasolina: _this.datos.capacidad_gasolina,
-                  n_ruedas: _this.datos.n_ruedas,
-                  id_chofer: '1'
-                }).then(function (response) {
-                  console.log(_this.vehicles); // let newData = this.data.map(obj =>
-                  //     //obj.id === this.data.id ? { ...obj, completed: true } : obj
-                  //     obj.id === this.data.id ? { 
-                  //         placa: this.datos.placa,
-                  //         marca: this.datos.marca,
-                  //         modelo: this.datos.modelo,
-                  //         capacidad_carga: this.datos.capacidad_carga,
-                  //         capacidad_gasolina: this.datos.capacidad_gasolina,
-                  //         n_ruedas: this.datos.n_ruedas,
-                  //         id_chofer: null,
-                  //         created_at: this.datos.created_at,
-                  //         updated_at: this.todayDate(),
-                  //     } : obj
-                  //var newData = this.data.find(({ _id }) => _id === editingUser); 
-                }) //$("#add").hide();
-                // $('#add').modal('toggle');
-                // $('#add').removeClass('in');
-                // $('#add').attr("aria-hidden","true");
-                // $('#add').css("display", "none");
-                // $('.modal-backdrop').remove();
-                // $('body').removeClass('modal-open');
-                //this.$router.push('/vehicles')
-                ["catch"](function (error) {
+                  carID: _this.formData.carID,
+                  brand: _this.formData.brand,
+                  model: _this.formData.model,
+                  loadingCapacity: _this.formData.loadingCapacity,
+                  fuelCapacity: _this.formData.fuelCapacity,
+                  wheelNumber: _this.formData.wheelNumber,
+                  //id_chofer:               '1'
+                  'fuelType': 'Gas'
+                })["catch"](function (error) {
                   alert(error);
                 });
 
@@ -51792,20 +51770,20 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model.trim",
-                    value: _vm.datos.placa,
-                    expression: "datos.placa",
+                    value: _vm.formData.carID,
+                    expression: "formData.carID",
                     modifiers: { trim: true }
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text" },
-                domProps: { value: _vm.datos.placa },
+                domProps: { value: _vm.formData.carID },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.datos, "placa", $event.target.value.trim())
+                    _vm.$set(_vm.formData, "carID", $event.target.value.trim())
                   },
                   blur: function($event) {
                     return _vm.$forceUpdate()
@@ -51831,20 +51809,20 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model.trim",
-                    value: _vm.datos.marca,
-                    expression: "datos.marca",
+                    value: _vm.formData.brand,
+                    expression: "formData.brand",
                     modifiers: { trim: true }
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text" },
-                domProps: { value: _vm.datos.marca },
+                domProps: { value: _vm.formData.brand },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.datos, "marca", $event.target.value.trim())
+                    _vm.$set(_vm.formData, "brand", $event.target.value.trim())
                   },
                   blur: function($event) {
                     return _vm.$forceUpdate()
@@ -51870,20 +51848,20 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model.trim",
-                    value: _vm.datos.modelo,
-                    expression: "datos.modelo",
+                    value: _vm.formData.model,
+                    expression: "formData.model",
                     modifiers: { trim: true }
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text" },
-                domProps: { value: _vm.datos.modelo },
+                domProps: { value: _vm.formData.model },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.datos, "modelo", $event.target.value.trim())
+                    _vm.$set(_vm.formData, "model", $event.target.value.trim())
                   },
                   blur: function($event) {
                     return _vm.$forceUpdate()
@@ -51911,19 +51889,23 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.datos.capacidad_carga,
-                    expression: "datos.capacidad_carga"
+                    value: _vm.formData.loadingCapacity,
+                    expression: "formData.loadingCapacity"
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text" },
-                domProps: { value: _vm.datos.capacidad_carga },
+                domProps: { value: _vm.formData.loadingCapacity },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.datos, "capacidad_carga", $event.target.value)
+                    _vm.$set(
+                      _vm.formData,
+                      "loadingCapacity",
+                      $event.target.value
+                    )
                   }
                 }
               })
@@ -51949,22 +51931,22 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model.trim",
-                    value: _vm.datos.capacidad_gasolina,
-                    expression: "datos.capacidad_gasolina",
+                    value: _vm.formData.fuelCapacity,
+                    expression: "formData.fuelCapacity",
                     modifiers: { trim: true }
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text" },
-                domProps: { value: _vm.datos.capacidad_gasolina },
+                domProps: { value: _vm.formData.fuelCapacity },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
                     _vm.$set(
-                      _vm.datos,
-                      "capacidad_gasolina",
+                      _vm.formData,
+                      "fuelCapacity",
                       $event.target.value.trim()
                     )
                   },
@@ -51994,14 +51976,14 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model.trim",
-                    value: _vm.datos.n_ruedas,
-                    expression: "datos.n_ruedas",
+                    value: _vm.formData.wheelNumber,
+                    expression: "formData.wheelNumber",
                     modifiers: { trim: true }
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text" },
-                domProps: { value: _vm.datos.n_ruedas },
+                domProps: { value: _vm.formData.wheelNumber },
                 on: {
                   keypress: function($event) {
                     return _vm.numeros($event)
@@ -52010,7 +51992,11 @@ var render = function() {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.datos, "n_ruedas", $event.target.value.trim())
+                    _vm.$set(
+                      _vm.formData,
+                      "wheelNumber",
+                      $event.target.value.trim()
+                    )
                   },
                   blur: function($event) {
                     return _vm.$forceUpdate()
@@ -52041,7 +52027,7 @@ var render = function() {
           attrs: {
             type: "submit",
             "data-bs-dismiss": "modal",
-            disabled: _vm.habilitado
+            disabled: _vm.isValid
           },
           on: { click: _vm.submit_form }
         },
@@ -52177,7 +52163,7 @@ var render = function() {
               },
               [
                 _c("VehiclesForm", {
-                  attrs: { datos: _vm.datos },
+                  attrs: { formData: _vm.formData },
                   on: { functionProp: _vm.submit_form }
                 })
               ],
@@ -52396,7 +52382,7 @@ var render = function() {
               { attrs: { action: "", method: "post", autocomplete: "off" } },
               [
                 _c("VehiclesForm", {
-                  attrs: { datos: _vm.datos },
+                  attrs: { formData: _vm.formData },
                   on: { functionProp: _vm.submit_form }
                 })
               ],

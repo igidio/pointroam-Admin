@@ -1,8 +1,10 @@
 <?php
 
+namespace Database\Seeders;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class pedidosSeeder extends Seeder
+class MessagesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
