@@ -46,10 +46,6 @@
         <!-- Custom Theme Style -->
         <link href="{{asset('css/custom.css')}}" rel="stylesheet">
 
-        <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
-        <link href="{{asset('gentella/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
-        <link href="{{asset('gentella/datatables.net-buttons-bs/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
-        <link href="{{asset('gentella/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css')}}" rel="stylesheet">
 
         <!-- Datepicker -->
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
