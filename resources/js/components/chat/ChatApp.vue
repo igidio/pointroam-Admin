@@ -22,18 +22,24 @@ export default {
     // props: {
     //     user: {
     //         type: Object,
-    //         required: true
+    //         required: true,
     //     }
     // },
     data() {
         return {
             selectedContact: null,
             messages: [],
-            contacts: []
+            contacts: [],
+            user: 1
         }
     },
     components: { Conversation, ContactsList },
     mounted(){
+        Echo.private('messages'+ this.user.id)
+            .listen('NewMessage',(e) => {
+                this.messages.push(text);
+            })
+
         axios.get('api/contacts').then(response => {
             this.contacts = response.data
         });
@@ -49,6 +55,12 @@ export default {
         },
         saveNewMessage(text){
             this.messages.push(text);
+        },
+        handleIncoming(message){
+            if(this.selectedContact && message.from == this.selectedContact.id){
+                this.saveNewMessage(message);
+                return;
+            }
         }
     },
 }

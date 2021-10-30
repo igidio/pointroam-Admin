@@ -37,9 +37,7 @@ export default {
     components: { MessagesFeed,MessagesComposer },
     methods: {
         sendMessage(text){
-            if (!this.contact) {
-                return;
-            }
+            if (!this.contact) { return; }
 
             axios.post('api/conversation/send', {
                 contact_id: this.contact.id,
