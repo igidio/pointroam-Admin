@@ -11,13 +11,15 @@ import Dashboard    from './components/dashboards/Dashboard.vue'
 
 import VehiclesMain from './components/vehicles/VehiclesMain.vue'
 import DriversIndex from './components/drivers/index/DriversIndex.vue'
+import ChatIndex from './components/chat/ChatApp.vue'
 
 const router = new VueRouter({
     mode: 'history',
     routes: [
-        { path: '/',    component: Dashboard,                   name: 'Dashboard' },
-        { path: '/vehicles',    component: VehiclesMain,       name: 'Vehicles'},
-        { path: '/drivers',    component: DriversIndex,       name: 'DriversIndex'},
+        { path: '/',            component: Dashboard,               name: 'Dashboard' },
+        { path: '/vehicles',    component: VehiclesMain,            name: 'Vehicles'},
+        { path: '/drivers',     component: DriversIndex,            name: 'DriversIndex'},
+        { path: '/chat',        component: ChatIndex,               name: 'Chat'},
     ]
 })
 

@@ -1,8 +1,10 @@
 <?php
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-//use App\Http\Controllers\Api\VehiclesController;
+
 use Api\VehiclesController;
+//use App\Http\Controllers\Api\ContactsController;
+use Api\ContactsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +20,11 @@ use Api\VehiclesController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
      return $request->user();
 });
-//Route::get('vehicles', [VehiclesController::class, 'index']);
-//Route::post('vehicles', 'VehiclesController@store');
-//Route::apiResource('vehicles', 'VehiclesController')->withoutMiddleware(['auth']);
 
 Route::group(['middleware' => ['cors']], function () {
      Route::apiResource('vehicles', VehiclesController::class);
 });
+
+Route::get('contacts', "Api\ContactsController@index");
+Route::get('conversation/{id}', "Api\ContactsController@getMessagesFor");
+Route::post('conversation/send', "Api\ContactsController@send");

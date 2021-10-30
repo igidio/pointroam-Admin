@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Mazer Admin Dashboard</title>
+    <title>Pointroam Admin</title>
     
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -24,45 +24,25 @@
 
 </head>
 
-{{--  --}}
-    {{-- <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!-- Meta, title, CSS, favicons, etc. -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>@yield('title')</title>
-        
-        <!-- NProgress -->
-        <link href="{{asset('gentella/nprogress/nprogress.css')}}" rel="stylesheet">
-        <!-- iCheck -->
-        <link href="{{asset('gentella/iCheck/skins/flat/green.css')}}" rel="stylesheet">
-        <!-- bootstrap-progressbar -->
-        <link href="{{asset('gentella/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet">
-        <!-- PNotify -->
-        <link href="{{asset('gentella/pnotify/dist/pnotify.css')}}" rel="stylesheet">
-        <link href="{{asset('gentella/pnotify/dist/pnotify.buttons.css')}}" rel="stylesheet">
-        <link href="{{asset('gentella/pnotify/dist/pnotify.nonblock.css')}}" rel="stylesheet">
-        <!-- Custom Theme Style -->
-        <link href="{{asset('css/custom.css')}}" rel="stylesheet">
-
-
-        <!-- Datepicker -->
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <link href="{{asset('bootstrap_datepicker/css/bootstrap-datepicker.css')}}" rel="stylesheet" />
-        <link href="{{asset('bootstrap_datepicker/css/bootstrap-datepicker.standalone.css')}}" rel="stylesheet" />
-        <link href="{{asset('bootstrap_datepicker/css/bootstrap-datepicker3.css')}}" rel="stylesheet" />
-        <link href="{{asset('bootstrap_datepicker/css/bootstrap-datepicker3.standalone.css')}}" rel="stylesheet" />
-        <script src="{{asset('bootstrap_datepicker/js/bootstrap-datepicker.js')}}"></script>
-        <script src="{{asset('bootstrap_datepicker/js/bootstrap-datepicker.min.js')}}"></script>
-        <script src="{{asset('bootstrap_datepicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
-    </head> --}}
 
 <body>
+
+    
+    
     <div id="app">
-        {{-- @include("layouts.sidebar") --}}
-        <app></app>
+        @php
+            $isLogged = (is_null(auth()->user()) ? false : true);
+            $user = (!$isLogged ? null : auth()->user());
+        @endphp
+        <app :boolislogged="{{json_encode($isLogged)}}" :user="{{json_encode($user)}}"></app>
+        {{-- <app :user="{{json_encode($user)}}"></app> --}}
         
+        {{-- @if(!empty(auth()->user()->id_personal))
+        <h1>Está logeado</h1>
+        @else
+        <h1>No está logeado</h1>
+        <body class="nav-sm footer_fixed">
+        @endif --}}
         
         {{-- <div id="main">
             <header class="mb-3">
@@ -182,9 +162,6 @@
 <script src="{{asset('template/js/bootstrap.bundle.min.js')}}"></script>
 
 <script src="{{asset('template/js/mazer.js')}}"></script>
-
-
-
 </body>
 </html>
 

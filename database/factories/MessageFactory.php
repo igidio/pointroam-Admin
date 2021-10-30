@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Message;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class MessageFactory extends Factory
 {
@@ -29,7 +30,7 @@ class MessageFactory extends Factory
         return [
             'from' => $from,
             'to' => $to,
-            'text' => $faker->sentence
+            'text' => $this->faker->sentence
         ];
     }
 }

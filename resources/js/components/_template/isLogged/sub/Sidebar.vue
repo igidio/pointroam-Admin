@@ -15,6 +15,13 @@
             </div>
             <div class="sidebar-menu">
                 <ul class="menu">
+                    <router-link tag="li" :to="{ name: 'Chat' }" class="sidebar-item" active-class="sidebar-item active">
+                        <a class='sidebar-link'>
+                            <i class="fas fa-id-card-alt"></i>
+                            <span>Chat</span>
+                        </a>
+                    </router-link>
+
                     <li class="sidebar-title">Transporte</li>
                     
                     <router-link tag="li" :to="{ name: 'DriversIndex' }" class="sidebar-item" active-class="sidebar-item active">
