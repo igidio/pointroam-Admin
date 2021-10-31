@@ -46,6 +46,7 @@ export default {
     },
     methods: {
         startConversationWith(contact){
+            this.updateUnreadCount(contact, true);
             //axios.get('/conversation/'+ contact.id)
             axios.get('api/conversation/'+contact.id)
             .then(response => {
@@ -53,14 +54,22 @@ export default {
                     this.selectedContact = contact;
             })
         },
-        saveNewMessage(text){
-            this.messages.push(text);
+        saveNewMessage(message){
+            this.messages.push(message);
         },
         handleIncoming(message){
             if(this.selectedContact && message.from == this.selectedContact.id){
                 this.saveNewMessage(message);
                 return;
             }
+            this.updateUnreadCount(contact.from_contact, false);
+        },
+        updateUnreadCount(contact,reset){
+            this.contacts = this.contacts.map((simple) => {
+                if(single.id != contact.id){ return single; }
+                if(reset){single.unread = 0} else {single.unread += 1}
+                return single;
+            })
         }
     },
 }

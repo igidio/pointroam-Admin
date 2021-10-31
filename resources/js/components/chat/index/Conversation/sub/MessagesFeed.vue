@@ -21,9 +21,7 @@ export default {
     },
     methods: {
         send(){
-            if(this.message == ''){
-                return;
-            }
+            if(this.message == ''){ return; }
             this.$emit('send',this.message);
             this.message = '';
         },

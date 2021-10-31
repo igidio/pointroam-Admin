@@ -12649,20 +12649,38 @@ __webpack_require__.r(__webpack_exports__);
     startConversationWith: function startConversationWith(contact) {
       var _this2 = this;
 
-      //axios.get('/conversation/'+ contact.id)
+      this.updateUnreadCount(contact, true); //axios.get('/conversation/'+ contact.id)
+
       axios.get('api/conversation/' + contact.id).then(function (response) {
         _this2.messages = response.data;
         _this2.selectedContact = contact;
       });
     },
-    saveNewMessage: function saveNewMessage(text) {
-      this.messages.push(text);
+    saveNewMessage: function saveNewMessage(message) {
+      this.messages.push(message);
     },
     handleIncoming: function handleIncoming(message) {
       if (this.selectedContact && message.from == this.selectedContact.id) {
         this.saveNewMessage(message);
         return;
       }
+
+      this.updateUnreadCount(contact.from_contact, false);
+    },
+    updateUnreadCount: function updateUnreadCount(contact, reset) {
+      this.contacts = this.contacts.map(function (simple) {
+        if (single.id != contact.id) {
+          return single;
+        }
+
+        if (reset) {
+          single.unread = 0;
+        } else {
+          single.unread += 1;
+        }
+
+        return single;
+      });
     }
   }
 });
@@ -12702,6 +12720,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     contacts: {
@@ -12711,14 +12730,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      //selected: this.contacts.length ? this.contacts[0] : null
-      //selected: 0
-      selected: null
+      selected: this.contacts.length ? this.contacts[0] : null //selected: 0
+      //selected: null
+
     };
   },
   methods: {
-    compClass: function compClass(index, type) {
-      if (index == this.selected) {
+    compClass: function compClass(contact, type) {
+      if (contact == this.selected) {
         if (type == "general") {
           return "list-group-item list-group-item-action active";
         } else {
@@ -12733,7 +12752,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     selectContact: function selectContact(contact) {
-      this.selected = contact.id - 1;
+      //this.selected = contact.id - 2;
+      this.selected = contact;
       this.$emit('selected', contact);
       console.log(this.selected);
     }
@@ -13574,8 +13594,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "",
-  cluster: "mt1",
+  key: "08c2035e7c21035f4659",
+  cluster: "us2",
   forceTLS: true
 });
 
@@ -59166,12 +59186,12 @@ var render = function() {
       _c(
         "div",
         { staticClass: "list-group" },
-        _vm._l(_vm.contacts, function(contact, index) {
+        _vm._l(_vm.sortedContacts, function(contact) {
           return _c(
             "a",
             {
               key: contact.id,
-              class: _vm.compClass(index, "general"),
+              class: _vm.compClass(contact, "general"),
               on: {
                 click: function($event) {
                   return _vm.selectContact(contact)
@@ -59183,13 +59203,17 @@ var render = function() {
                 "div",
                 { staticClass: "d-flex w-100 justify-content-between" },
                 [
-                  _c("h5", { class: _vm.compClass(index, "username") }, [
+                  _c("h5", { class: _vm.compClass(contact, "username") }, [
                     _vm._v(_vm._s(contact.username))
                   ]),
                   _vm._v(" "),
                   _c("small", [_vm._v("Hace 3 días")])
                 ]
               ),
+              _vm._v(" "),
+              contact.unread
+                ? _c("span", [_vm._v(_vm._s(contact.unread))])
+                : _vm._e(),
               _vm._v(" "),
               _c("small", [_vm._v(_vm._s(contact.email))])
             ]
