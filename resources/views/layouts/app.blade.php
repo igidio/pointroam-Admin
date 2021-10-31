@@ -34,7 +34,11 @@
             $isLogged = (is_null(auth()->user()) ? false : true);
             $user = (!$isLogged ? null : auth()->user());
         @endphp
-        <app :boolislogged="{{json_encode($isLogged)}}" :user="{{json_encode($user)}}"></app>
+        {{-- <app :boolislogged="{{json_encode($isLogged)}}" :user="{{json_encode($user)}}"></app> --}}
+        
+        <app></app>        
+        {{-- <router-view></router-view> --}}
+
         {{-- <app :user="{{json_encode($user)}}"></app> --}}
         
         {{-- @if(!empty(auth()->user()->id_personal))

@@ -72,9 +72,32 @@
 import Sidebar from './sub/Sidebar.vue'
 import Footer from './sub/Footer.vue'
 export default {
+    data(){ return { token: localStorage.getItem('token') } },
     components: {
         Footer, Sidebar
     },
-    
+    mounted() {
+        window.axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
+        //this.getEmployees() 
+        axios.get('api/user').then((response) => {
+            this.currentUser = response.data
+            console.log(this.currentUser)
+        }).catch((errors) => {
+            console.log(errors)
+            console.log("dssadasd")
+        })
+    },
+    methods: {
+        logout(){        
+            axios.post('api/logout')
+            .then((response) => {
+                localStorage.removeItem('token')
+                this.$router.push('/login')
+            })
+            .catch((errors) => {
+                console.log(errors)
+            })
+        },
+    }
 }
 </script>

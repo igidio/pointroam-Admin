@@ -2,32 +2,50 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 import VueRouter from 'vue-router';
+import routes from './routes';
+import Login from './components/_template/login/login.vue'
 Vue.use(VueRouter);
 // import Vuex from 'vuex';
 // Vue.use(Vuex)
 
-import App          from './components/App.vue'
-import Dashboard    from './components/dashboards/Dashboard.vue'
+const router = new VueRouter(routes)
 
-import VehiclesMain from './components/vehicles/VehiclesMain.vue'
-import DriversIndex from './components/drivers/index/DriversIndex.vue'
-import ChatIndex from './components/chat/ChatApp.vue'
+import App from './components/App.vue'
+import { data } from 'jquery';
 
-const router = new VueRouter({
-    mode: 'history',
-    routes: [
-        { path: '/',            component: Dashboard,               name: 'Dashboard' },
-        { path: '/vehicles',    component: VehiclesMain,            name: 'Vehicles'},
-        { path: '/drivers',     component: DriversIndex,            name: 'DriversIndex'},
-        { path: '/chat',        component: ChatIndex,               name: 'Chat'},
-    ]
+function loggedIn(){ return localStorage.getItem('token') }
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!loggedIn()) {
+            next({
+                path: '/login',
+                component: Login
+            })
+        } else { next() }
+    } else if(to.matched.some(record => record.meta.guest)) {
+        if (loggedIn()) {
+            next({
+                path: '/',
+                component: App
+            })
+        } else { next() }
+    } else { next() }
 })
+
+// const router = new VueRouter({
+//     mode: 'history',
+//     routes: [
+//         { path: '/',            component: Dashboard,               name: 'Dashboard' },
+//         { path: '/vehicles',    component: VehiclesMain,            name: 'Vehicles'},
+//         { path: '/drivers',     component: DriversIndex,            name: 'DriversIndex'},
+//         { path: '/chat',        component: ChatIndex,               name: 'Chat'},
+//     ]
+// })
 
 const app = new Vue({
     el: '#app',
-    components: { 
-        App
-    },
+    components: { App },
     router
 });
 

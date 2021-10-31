@@ -1,9 +1,17 @@
 <template>
     <!-- Cuando haya auth -->
-    <!-- <div v-if="thisislogged">           <mainView/>  </div>
-    <div v-else> <login @functionProp="loginNow"/>   </div> -->
+    <!-- <div v-if="thisislogged"><mainView/> </div> -->
+    <!-- <div v-else> <login @functionProp="loginNow"/>   </div> -->
+    <!-- <div v-else> <login>   </div> -->
+    <!-- <login/> -->
 
-    <div>  <mainView/>  </div>
+    <div>
+        <div v-if="$route.name == 'Login'"> <login/> </div>
+        <div v-else> <mainView/> </div>    
+    </div>
+
+
+    <!-- <div>  <mainView/>  </div> -->
 </template>
 
 <script>
@@ -18,8 +26,8 @@ export default {
     data() {
         return{ thisislogged: this.islogged }
     },
-    methods: {
-        loginNow(){ this.thisislogged = true; }
-    }
+    // methods: {
+    //     loginNow(){ this.thisislogged = true; }
+    // }
 }
 </script>

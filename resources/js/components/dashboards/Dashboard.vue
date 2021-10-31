@@ -6,5 +6,12 @@
         <div class="card-body">
             Este es el dashboard
         </div>
+        <button @click="logout">Logout</button>
     </div>
 </template>
+
+<script>
+export default {
+
+}
+</script>

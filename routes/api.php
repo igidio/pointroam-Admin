@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Api\VehiclesController;
 //use App\Http\Controllers\Api\ContactsController;
 use Api\ContactsController;
+use Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,10 @@ use Api\ContactsController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//      return $request->user();
+// });
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
      return $request->user();
 });
 
@@ -28,3 +32,7 @@ Route::group(['middleware' => ['cors']], function () {
 Route::get('contacts', "Api\ContactsController@index");
 Route::get('conversation/{id}', "Api\ContactsController@getMessagesFor");
 Route::post('conversation/send', "Api\ContactsController@send");
+
+Route::post('login', "Api\AuthController@login");
+Route::post('logout', "Api\AuthController@logout")->middleware('auth:sanctum');
+//Route::post('register', "AuthController@register");
