@@ -5,15 +5,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Message;
 
-class MessagesSeeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
+class MessagesSeeder extends Seeder {
+
+    public function run() {
         Message::factory(50)->create();
     }
 }

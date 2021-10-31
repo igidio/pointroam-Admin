@@ -12,12 +12,41 @@ class ContactsController extends Controller
 {
     public function index(){
         //$contacts = User::all();
-        //$contacts = User::where('id', '!=', auth()->id())->get();
+        
+        //Obtener todos los usuarios menos los autenticados
         $contacts = User::where('id', '!=', 1)->get();
+        //$contacts = User::where('id', '!=', auth()->id())->get();
+
+        $unreadIds = Message::select(\DB::raw('`from` as sender_id, count(`from`) as messages_count'))
+            //->where('to',auth()->id())
+            ->where('to',1)
+            ->where('read',false)
+            ->groupBy('from')
+            ->get();
+        
+        $contacts = $contacts->map(function($contact) use ($unreadIds) {
+            $contactUnread = $unreadIds->where('sender_id', $contact->id)->first();
+            $contact->unread = $contactUnread ? $contactUnread->messages_count : 0;
+            return $contact;
+        });
+
         return response()->json($contacts);
     }
     public function getMessagesFor($id){
-        $messages = Message::where('from',$id)->orWhere('to',$id)->get();
+        //$messages = Message::where('from',$id)->orWhere('to',$id)->get();
+        //$messages = Message::where('from',$id)->orWhere('to',auth()->id())->update(['read' => true]); //Arreglar
+        $messages = Message::where('from',$id)->orWhere('to',1)->update(['read' => true]);
+
+        $messages = Message::where(function($q) use ($id){
+            //$q->where('from', auth()->id());
+            $q->where('from', 1);
+            $q->where('to', $id);
+        })->orWhere(function($q) use ($id){
+            $q->where('from', $id);
+            $q->where('to', 1);
+            //$q->where('to', auth()->id());
+        })->get();
+
         return response()->json($messages);
     }
     public function send(Request $request){
