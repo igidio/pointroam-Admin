@@ -1,7 +1,6 @@
 <template>
   	<div>
 		<div class="modal-body">
-
 			<div class="row">
 				<div class="col-12">
 					<div class="form-group">
@@ -89,8 +88,7 @@ export default {
 				this.formData.loadingCapacity != null &&
 				this.formData.fuelCapacity != null &&
 				this.formData.wheelNumber != null
-			){ return false; } else {
-				return true; }			
+			){ return false; } else { return true; }			
 		}		
 	}
 }

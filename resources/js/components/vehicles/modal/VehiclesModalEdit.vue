@@ -23,8 +23,11 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+import DateMixins from "../../../mixins/dateMixins.js"
 import VehiclesForm from "../forms/VehiclesForm.vue";
 export default {
+    mixins: [DateMixins],
     components: {
         VehiclesForm
     },
@@ -41,24 +44,15 @@ export default {
                 loadingCapacity: this.data.loadingCapacity,
                 fuelCapacity: this.data.fuelCapacity,
                 wheelNumber: this.data.wheelNumber,
+                id: this.data.id,
+                updated_at: this.todayDate()
             }
         }
     },
     methods: {
-        async submit_form(){
-            await axios.put('api/vehicles/' + this.data.id,{
-                carID:                  this.formData.carID,
-                brand:                  this.formData.brand,
-                model:                 this.formData.model,
-                loadingCapacity:        this.formData.loadingCapacity,
-                fuelCapacity:     this.formData.fuelCapacity,
-                wheelNumber:               this.formData.wheelNumber,
-                //id_chofer:               '1'
-                'fuelType': 'Gas',
-            })
-            .catch(function (error) {
-                 alert(error)
-            });
+        ...mapActions(['editVehicle']),
+        submit_form(){
+            this.editVehicle(this.formData);
         }
     }
 }

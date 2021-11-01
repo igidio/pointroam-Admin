@@ -1,58 +1,61 @@
 <template>
-    <div class="top_nav">
-        <div class="nav_menu">
-            <!-- @if(!empty(auth()->user()->id_personal)) -->
-                <div class="nav toggle">
-                    <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                </div>
-            <!-- @endif -->
-            
-            <nav class="nav navbar-nav">
-                <ul class=" navbar-right">
-                <li class="nav-item dropdown open" style="padding-left: 15px;">
-                    <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                    <!-- @if (!empty(Auth::user()->imagen))
-                        <img src="{{ url('/avatar/'.Auth::user()->imagen)}}" alt=""><b>{{'@' . Auth::user()->username}}</b>
-                    @else
-                        <img src="{{asset('images/default_user.png')}}" alt=""><b>{{'@' . Auth::user()->username}}</b>
-                    @endif -->
-                    </a>
-                    <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item"  href="{{ action('usuarioController@getInfo') }}"><i class="fas fa-user-circle"></i> Información de perfil</a>
-                        <a class="dropdown-item"  href="javascript:;"><i class="fas fa-cog"></i> Configuraciones</a>
-                        <a class="dropdown-item" href="login.html" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-power-off"></i> Cerrar sesión</a>
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="align-items-center">
+                            <!-- <h3>@yield('title')</h3> -->
+                            <h3>Titulo</h3>
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-lg-start">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Alert</li>
+                                </ol>
+                            </nav>
+                        </div>
                     </div>
-                </li>
-                <li role="presentation" class="nav-item dropdown open">
-                    <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-bell"></i>
-                    <span class="badge bg-green">6</span>
-                    </a>
-                    <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
-                        <li class="nav-item">
-                            <a class="dropdown-item">
-                            <span class="image"><img src="{{ url('/avatar/'.Auth::user()->imagen)}}" alt="Foto de perfil" /></span>
-                            <span>
-                            <span>John Smith</span>
-                            <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                            Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                            </a>
-                        </li>                                                                                      
-                        <li class="nav-item">
-                            <div class="text-center">
-                            <a class="dropdown-item">
-                            <strong>See All Alerts</strong>
-                            <i class="fa fa-angle-right"></i>
-                            </a>
+                    
+                    <div class="col-3">
+                        <!-- Mientras no carga -->
+                        <div v-if="info.username == ''">
+                            <div class="spinner-border text-primary align-items-center float-end" role="status">
+                                <span class="visually-hidden">Loading...</span>
                             </div>
-                        </li>
-                    </ul>
-                </li>
-                </ul>
-            </nav>
+                        </div>
+                        <!-- Ya cargado -->
+                        <div v-else class="d-flex align-items-center float-end"  id="dropdownMenuButtonIcon" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
+                                <div class="avatar avatar-xl">
+                                    <img src="template/images/faces/1.jpg" alt="I">
+                                </div>
+                                <div class="ms-3 name">
+                                    <h5 class="font-bold">John Duck</h5>
+                                    <h6 class="text-muted mb-0" >@{{info.username}}</h6>
+                                </div>
+                                <div class="ms-3">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                        </div>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonIcon" style="margin: 0px;">
+                            <!-- <a class="dropdown-item" href="{{ action('usuarioController@getInfo') }}"><i class="fas fa-user-circle"></i>Ver información de la cuenta</a> -->
+                            <a class="dropdown-item" @click="logout"><i class="fas fa-power-off"></i> Cerrar sesión</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    props: {
+        info: {Type: Object}
+    },
+    methods: {
+        logout(){            
+            this.$emit('functionProp')
+        }
+    }
+}
+</script>

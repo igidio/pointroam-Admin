@@ -37,5 +37,12 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: process.env.MIX_PUSHER_APP_KEY,
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    forceTLS: true
+    authEndpoint: 'http://pointroam.test/api/broadcasting/auth',
+    forceTLS: false,
+
+    // auth:{
+    //      headers:{
+    //         Authorization: `Bearer 28|12r51m3dBSQzdXtwb5RvF5mF3NKiuUKwwWC7tSD6`
+    //      }
+    // }
 });

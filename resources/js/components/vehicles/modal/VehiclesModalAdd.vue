@@ -21,6 +21,7 @@
 <script>
 import VehiclesForm from "../forms/VehiclesForm.vue";
 import DateMixins from "../../../mixins/dateMixins.js"
+import {mapActions} from 'vuex'
 
 export default {
     mixins: [DateMixins],
@@ -32,46 +33,17 @@ export default {
                 model: "",
                 loadingCapacity: null,
                 fuelCapacity: null,
-                wheelNumber: null
+                wheelNumber: null,
+                todayDate: this.todayDate()
             }
         }
     },
-    props: {
-        vehicles: Array
-    },
-    components: {
-        VehiclesForm
-    },
+    components: { VehiclesForm },
     methods: {
-        async submit_form(){
-            await axios.post('api/vehicles',{
-                carID:                      this.formData.carID,
-                brand:                      this.formData.brand,
-                model:                      this.formData.model,
-                loadingCapacity:            this.formData.loadingCapacity,
-                fuelCapacity:               this.formData.fuelCapacity,
-                wheelNumber:                this.formData.wheelNumber,
-                color:               'Negro'
-            })
-            .then(response => {
-                this.vehicles.push({
-                    carID: this.formData.carID,
-                    brand: this.formData.brand,
-                    model: this.formData.model,
-                    loadingCapacity: this.formData.loadingCapacity,
-                    fuelCapacity: this.formData.fuelCapacity,
-                    wheelNumber: this.formData.wheelNumber,
-                    //id_chofer: null,
-                    id: this.vehicles.length + 1,
-                    created_at: this.todayDate(),
-                    updated_at: this.todayDate(),
-                });
-            })
-
-            .catch(function (error) {
-                 alert(error)
-            });
-        },
+        ...mapActions(['addVehicle']),
+        submit_form(){
+            this.addVehicle(this.formData);
+        }
     }
 }
 </script>

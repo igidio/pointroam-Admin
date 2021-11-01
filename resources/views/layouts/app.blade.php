@@ -21,7 +21,7 @@
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-
+    
 </head>
 
 
@@ -38,6 +38,8 @@
         
         <app></app>        
         {{-- <router-view></router-view> --}}
+
+        
 
         {{-- <app :user="{{json_encode($user)}}"></app> --}}
         
@@ -165,9 +167,10 @@
 <script src="{{asset('template/vendors/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
 <script src="{{asset('template/js/bootstrap.bundle.min.js')}}"></script>
 
-<script src="{{asset('template/js/mazer.js')}}"></script>
 </body>
 </html>
+
+<script src="{{asset('template/js/bootstrap.bundle.min.js')}}"></script>
 
 
 
@@ -393,3 +396,4 @@ function soloNumeros(e){
     }
     }
 </script> --}}
+

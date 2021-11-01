@@ -1,7 +1,6 @@
 <template>
 <div>
     <VehiclesModalAdd :vehicles="vehicles"/>
-
     <div class="card">
         <div class="card-header"><h5>Lista de vehículos registrados</h5></div>
         <div class="card-body">
@@ -19,15 +18,16 @@
 </template>
 
 <script>
-
 import Vue from "vue";
 import DataTable from "@andresouzaabreu/vue-data-table";
-Vue.component("data-table", DataTable);
 import "@andresouzaabreu/vue-data-table/dist/DataTable.css";
+Vue.component("data-table", DataTable);
 
 import BtnEliminar from "../modal/VehiclesModalDelete.vue";
 import BtnModificar from "../modal/VehiclesModalEdit.vue";
 import VehiclesModalAdd from '../modal/VehiclesModalAdd.vue';
+
+import {mapActions, mapState} from 'vuex'
 
 export default {
     components: {
@@ -35,28 +35,31 @@ export default {
     },
     data(){
         return {
-            vehicles: [],
-            isLoaded: false
+            //vehicles: [],
+            isLoaded: true
         }
     },
     mounted(){
-        this.getIndex();
+        this.getVehicles()
     },
     methods: {
-        getIndex(){
-            axios.get('/api/vehicles').then(response => {
-                //this.vehicles = response.data;
-                this.vehicles = response.data.data;
-                this.isLoaded = true
-            }).then(
-                console.log(this.vehicles)
-            );
-            
-        },
+        //getIndex(){
+            // axios.get('/api/vehicles').then(response => {
+            //     //this.vehicles = response.data;
+            //     this.vehicles = response.data.data;
+            //     this.isLoaded = true
+            // }).then(
+            //     console.log(this.vehicles)
+            // );            
+        //},
+        ...mapActions(['getVehicles'])
     },
     computed: {
+        ...mapState({            
+            vehicles: state => state.vehicles
+        }),
         bindings() {
-            //alert("Esto");
+            console.log(this.vehicles);
             return {
                 columns: [
                     {key: "carID", title: "Placa"},
@@ -69,10 +72,11 @@ export default {
                     {title: "Modificar", component: BtnModificar },
                     {title: "Eliminar", component: BtnEliminar},
                 ],
-                data: this.vehicles,
+                data: Object.values(this.vehicles.vehicles),
                 lang: 'es',
             }
-        }
+        },
+        
     }
 }
 </script>

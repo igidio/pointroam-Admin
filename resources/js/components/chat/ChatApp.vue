@@ -35,10 +35,11 @@ export default {
     },
     components: { Conversation, ContactsList },
     mounted(){
-        Echo.private('messages'+ this.user.id)
-            .listen('NewMessage',(e) => {
-                this.messages.push(text);
-            })
+        Echo.private(`messages.${this.user}`)
+        
+             .listen('NewMessage',(e) => {
+                 this.messages.push(text);
+             });
 
         axios.get('api/contacts').then(response => {
             this.contacts = response.data
@@ -46,7 +47,7 @@ export default {
     },
     methods: {
         startConversationWith(contact){
-            this.updateUnreadCount(contact, true);
+            //this.updateUnreadCount(contact, true);
             //axios.get('/conversation/'+ contact.id)
             axios.get('api/conversation/'+contact.id)
             .then(response => {
@@ -62,15 +63,16 @@ export default {
                 this.saveNewMessage(message);
                 return;
             }
-            this.updateUnreadCount(contact.from_contact, false);
+            //this.updateUnreadCount(contact.from_contact, false);
+            alert(message.text);
         },
-        updateUnreadCount(contact,reset){
-            this.contacts = this.contacts.map((simple) => {
-                if(single.id != contact.id){ return single; }
-                if(reset){single.unread = 0} else {single.unread += 1}
-                return single;
-            })
-        }
+        // updateUnreadCount(contact,reset){
+        //     this.contacts = this.contacts.map((simple) => {
+        //         if(single.id != contact.id){ return single; }
+        //         if(reset){single.unread = 0} else {single.unread += 1}
+        //         return single;
+        //     })
+        // }
     },
 }
 </script>

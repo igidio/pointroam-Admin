@@ -15,7 +15,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button type="submit" @click="deleteVehicle" data-bs-dismiss="modal" class="btn btn-danger">Elminar elemento</button>
+              <button type="submit" @click="deleteVehicle(data.id)" data-bs-dismiss="modal" class="btn btn-danger">Elminar elemento</button>
             </div>
         </div>
       </div>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: "ButtonDelete",
   props: {
@@ -33,13 +34,7 @@ export default {
     },
   },
   methods: {
-    deleteVehicle(){
-      axios.delete('/api/vehicles/' + this.data.id )
-        .then(response => {
-          //alert("Eliminado correctamente")
-        })
-
-    }
+    ...mapActions(['deleteVehicle'])    
   }
 }
 </script>

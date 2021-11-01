@@ -4,16 +4,14 @@ window.Vue = require('vue').default;
 import VueRouter from 'vue-router';
 import routes from './routes';
 import Login from './components/_template/login/login.vue'
+import store from './store.js';
 Vue.use(VueRouter);
-// import Vuex from 'vuex';
-// Vue.use(Vuex)
 
 const router = new VueRouter(routes)
-
 import App from './components/App.vue'
-import { data } from 'jquery';
 
 function loggedIn(){ return localStorage.getItem('token') }
+Vue.prototype.globalId = ''
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
@@ -43,21 +41,14 @@ router.beforeEach((to, from, next) => {
 //     ]
 // })
 
+
+
+Vue.config.productionTip = false
+
 const app = new Vue({
     el: '#app',
     components: { App },
-    router
+    
+    router,
+    store
 });
-
-// export default new Vuex.Store({
-//     state: {
-//       vehicles: [],
-//       vehicle: {nombre: '', id: ''}
-//     },
-//     mutations: {
-//     },
-//     actions: {
-//     },
-//     modules: {
-//     }
-// })

@@ -36,3 +36,8 @@ Route::post('conversation/send', "Api\ContactsController@send");
 Route::post('login', "Api\AuthController@login");
 Route::post('logout', "Api\AuthController@logout")->middleware('auth:sanctum');
 //Route::post('register', "AuthController@register");
+
+Route::post('/broadcast',function (Request $request){
+     $pusher = new PusherPusher(env('PUSHER_APP_KEY'),env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'));
+     return $pusher->socket_auth($request->request->get('channel_name'),$request->request->get('socket_id'));
+});
