@@ -1,8 +1,10 @@
-import VehiclesMain from './components/vehicles/VehiclesMain.vue'
-import DriversIndex from './components/drivers/index/DriversIndex.vue'
-import ChatIndex from './components/chat/ChatApp.vue'
+import VehiclesMain from './components/Sidebar/vehicles/VehiclesMain.vue'
+import DriversIndex from './components/Sidebar/drivers/index/DriversIndex.vue'
+import ChatIndex from './components/Sidebar/chat/ChatApp.vue'
 import Dashboard    from './components/dashboards/Dashboard.vue'
 import Login from './components/_template/login/login.vue'
+//UserOptions
+import UserInfo from './components/UserOptions/UserInfo/UserInfo.vue'
 
 export default {
     mode: 'history',
@@ -32,6 +34,13 @@ export default {
             name: 'Chat',
             meta: {requiresAuth: true}
         },
+        { 
+            path: '/user',
+            component: UserInfo,
+            name: 'User',
+            meta: {requiresAuth: true}
+        },
+        //GUEST
         { 
             path: '/login',
             component: Login,

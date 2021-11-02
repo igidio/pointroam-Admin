@@ -7,6 +7,26 @@ import Login from './components/_template/login/login.vue'
 import store from './store.js';
 Vue.use(VueRouter);
 
+import VueNotification from "@kugatsu/vuenotification";
+Vue.use(VueNotification, {
+    timer: 5,
+    position: "bottomCenter",
+    primary: {
+        background: "#3950A2",
+        color: "white"
+    },
+    warning: {
+        background: "#FFCA2C",
+        color: "black"
+    }, 
+    warning: {
+        background: "#FFCA2C",
+        color: "black"
+    }, 
+    showLeftIcn: false
+});
+
+
 const router = new VueRouter(routes)
 import App from './components/App.vue'
 

@@ -18,7 +18,7 @@
                     
                     <div class="col-3">
                         <!-- Mientras no carga -->
-                        <div v-if="info.username == ''">
+                        <div v-if="username == ''">
                             <div class="spinner-border text-primary align-items-center float-end" role="status">
                                 <span class="visually-hidden">Loading...</span>
                             </div>
@@ -29,15 +29,15 @@
                                     <img src="template/images/faces/1.jpg" alt="I">
                                 </div>
                                 <div class="ms-3 name">
-                                    <h5 class="font-bold">John Duck</h5>
-                                    <h6 class="text-muted mb-0" >@{{info.username}}</h6>
+                                    <h5 class="font-bold">{{firstname}}</h5>
+                                    <h6 class="text-muted mb-0" >@{{username}}</h6>
                                 </div>
                                 <div class="ms-3">
                                     <i class="fas fa-chevron-down"></i>
                                 </div>
                         </div>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonIcon" style="margin: 0px;">
-                            <!-- <a class="dropdown-item" href="{{ action('usuarioController@getInfo') }}"><i class="fas fa-user-circle"></i>Ver información de la cuenta</a> -->
+                            <router-link class="dropdown-item" :to="{ name: 'User' }"><i class="fas fa-user-circle"></i>Ver información de la cuenta</router-link>
                             <a class="dropdown-item" @click="logout"><i class="fas fa-power-off"></i> Cerrar sesión</a>
                         </div>
                     </div>
@@ -50,7 +50,8 @@
 <script>
 export default {
     props: {
-        info: {Type: Object}
+        username: String,
+        firstname: String
     },
     methods: {
         logout(){            

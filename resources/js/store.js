@@ -8,6 +8,7 @@ const modVehicles = {
     mixins: [DateMixins],
     state: {
         vehicles: Array,
+        loaded: 'no',
         vehicle: {
             nombre: '', 
             id: '',
@@ -41,6 +42,9 @@ const modVehicles = {
         },
         setDeleteVehicle(state,payload){
             state.vehicles = state.vehicles.filter(item => item.id !== payload)
+        },
+        setLoaded(state,payload){
+            state.loaded = payload
         }
     },
     actions: {
@@ -49,8 +53,11 @@ const modVehicles = {
             axios.get('/api/vehicles')
             .then(response => {
                 vehicles = response.data.data;
-                //this.isLoaded = true
                 commit('setVehicles',vehicles)
+                commit('setLoaded',"success")
+            })
+            .catch(response => {
+                commit('setLoaded',"error")
             });
         },
         addVehicle({commit},formData){
@@ -64,7 +71,7 @@ const modVehicles = {
                 color:                      'Negro',                
             })
             .then(response => {                
-                commit('updateAddVehicles',formData);
+                commit('updateAddVehicles',formData);                
             })
             .catch(function (error) {
                     alert(error)
@@ -83,9 +90,10 @@ const modVehicles = {
             })
             .then(response => {                
                 commit('updateVehicle',formData)
+                commit('setLoaded',"success")
             })
             .catch(function (error) {
-                 alert(error)
+                commit('setLoaded',"error")
             });
         },
         deleteVehicle({commit},id){
@@ -98,8 +106,66 @@ const modVehicles = {
     modules: {}
 }
 
+const modUsers = {
+    state: {
+        infouser: {},
+        details: {},
+
+    },
+    mutations: {
+        setInfouser(state,payload){ state.infouser = payload },
+        setDetails(state,payload){ state.details = payload }
+    },
+    actions: {        
+        getUser({commit}){
+            var infouser = {}
+            var details = {}
+            window.axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
+            axios.get('api/user')
+            .then(() => {
+                axios.get('api/userinformation')            
+                .then((response) => {
+                    infouser.username = response.data.username;
+                    infouser.email = response.data.email,
+                    infouser.access = response.data.access,
+                    infouser.image = response.data.image,
+                    infouser.updated_at = response.data.updated_at,
+
+                    details.firstname = response.data.subjects.firstname,
+                    details.lastnameP = response.data.subjects.lastnameP,
+                    details.lastnameM = response.data.subjects.lastnameM,
+                    details.address = response.data.subjects.address,
+                    details.birthday = response.data.subjects.birthday,
+                    details.numberID = response.data.subjects.numberID,
+                    details.department = response.data.subjects.department,
+                    details.phone = response.data.subjects.phone,
+
+                    commit('setInfouser',infouser)
+                    commit('setDetails',details)
+                    //commit('setDetails',details)
+                })                
+            }).catch((errors) => {
+                console.log(errors)
+            })
+        },
+        logout({commit}){
+            axios.post('api/logout')
+            .then(() => {
+                localStorage.removeItem('token')
+                this.$router.push('/login')
+            })
+            .catch((errors) => {
+                console.log(errors)
+            })
+        }
+    },
+    modules: {
+    }
+}
+
 export default new Vuex.Store({
     modules: {
-        vehicles: modVehicles
+        vehicles: modVehicles,
+        user: modUsers,
     }
 })

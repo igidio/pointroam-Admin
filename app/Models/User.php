@@ -10,30 +10,29 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable {
     use Notifiable, HasApiTokens;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'username', 'email', 'password',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'created_at'
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function subjects(){
+        //return $this->belongsTo(Driver::class, 'idSubjects');
+        //return $this->belongsTo(Subject::class, 'idSubjects', 'id');
+        //return $this->belongsTo('App/Models/Subject', 'idSubjects', 'id');
+        //return $this->hasOne('App\Models\Subject', 'idSubjects');
+        return $this->hasOne(Subject::class,'id','idSubjects');
+    }
+    public function drivers(){
+        //return $this->belongsTo(Driver::class, 'idSubjects');
+        //return $this->belongsTo(Subject::class, 'idSubjects', 'id');
+        //return $this->belongsTo('App/Models/Subject', 'idSubjects', 'id');
+        return $this->hasOne('App\Models\Driver', 'idDrivers');
+    }
 }

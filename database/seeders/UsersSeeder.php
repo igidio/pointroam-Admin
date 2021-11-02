@@ -40,6 +40,17 @@ class UsersSeeder extends Seeder {
               'password' => Hash::make('QWERTYUI'),
               'created_at' => date('Y-m-d H:i:s'),
               'updated_at' => date('Y-m-d H:i:s')
+            ],
+            [
+              'idSubjects' => 2,
+              'idCustomers' => null,
+              'idDrivers' => null,
+              'access' => true,
+              'username' => 'sujeto2',
+              'email' => 'sujeto2@gmail.com',
+              'password' => Hash::make('QWERTYUI'),
+              'created_at' => date('Y-m-d H:i:s'),
+              'updated_at' => date('Y-m-d H:i:s')
             ]
         ]);
     }
